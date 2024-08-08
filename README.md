@@ -32,7 +32,7 @@
    cd usepopcorn
 
 
-<h1>
+<pre>
 usepop/
 ├── public/
 │   └── index.html
@@ -49,4 +49,4 @@ usepop/
 ├── package.json
 └── ...
 
-<h1/>
+</pre>
