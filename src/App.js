@@ -191,18 +191,22 @@ function Watchsummary({ watched }) {
     </div>
   );
 }
-function WatchedMovieList({ watched }) {
+function WatchedMovieList({ watched, onDeleteWatched }) {
   // const [watched, setWatched] = useState(tempWatchedData);
 
   return (
     <ul className="list">
       {watched.map((movie) => (
-        <WatchedMovie movie={movie} key={movie.imdbID} />
+        <WatchedMovie
+          movie={movie}
+          key={movie.imdbID}
+          onDeleteWatched={onDeleteWatched}
+        />
       ))}
     </ul>
   );
 }
-function WatchedMovie({ movie }) {
+function WatchedMovie({ movie, onDeleteWatched }) {
   return (
     <li>
       <img src={movie.poster} alt={`${movie.title} poster`} />
@@ -220,6 +224,13 @@ function WatchedMovie({ movie }) {
           <span>⏳</span>
           <span>{movie.runtime} min</span>
         </p>
+
+        <button
+          className="btn-delete"
+          onClick={() => onDeleteWatched(movie.imdbID)}
+        >
+          X
+        </button>
       </div>
     </li>
   );
@@ -241,7 +252,9 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
   const [isLoading, setIsLoading] = useState(false);
   const [userRating, setuserRating] = useState("");
   const isWatched = watched.map((movie) => movie.imdbId).includes(selectedId);
-  console.log(isWatched);
+  const watchedUserRating = watched.find(
+    (movie) => movie.imdbId === selectedId
+  )?.userRating;
 
   const {
     Title: title,
@@ -326,7 +339,9 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
                   )}
                 </>
               ) : (
-                <p>You rated with Movie</p>
+                <p>
+                  You rated this Movie {watchedUserRating} <span>⭐️</span>
+                </p>
               )}
             </div>
             <p>
@@ -360,6 +375,10 @@ export default function App() {
 
   function handleAddWatched(movie) {
     setWatched((watched) => [...watched, movie]);
+  }
+
+  function handleDeleteWatched(id) {
+    setWatched((watched) => watched.filter((movie) => movie.imdbID !== id));
   }
   useEffect(() => {
     async function fetchMovies() {
@@ -426,7 +445,11 @@ export default function App() {
             ) : (
               <>
                 <Watchsummary watched={watched} isLoading={isLoading} />
-                <WatchedMovieList watched={watched} isLoading={isLoading} />
+                <WatchedMovieList
+                  watched={watched}
+                  isLoading={isLoading}
+                  onDeleteWatched={handleDeleteWatched}
+                />
               </>
             )
           }
