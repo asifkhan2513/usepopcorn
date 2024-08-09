@@ -205,8 +205,8 @@ function WatchedMovieList({ watched }) {
 function WatchedMovie({ movie }) {
   return (
     <li>
-      <img src={movie.Poster} alt={`${movie.Title} poster`} />
-      <h3>{movie.Title}</h3>
+      <img src={movie.poster} alt={`${movie.title} poster`} />
+      <h3>{movie.title}</h3>
       <div>
         <p>
           <span>⭐️</span>
@@ -236,9 +236,13 @@ function ErrorMessage({ message }) {
   );
 }
 
-function MovieDetails({ selectedId, onCloseMovie }) {
+function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [userRating, setuserRating] = useState("");
+  const isWatched = watched.map((movie) => movie.imdbId).includes(selectedId);
+  console.log(isWatched);
+
   const {
     Title: title,
     Year: year,
@@ -251,9 +255,23 @@ function MovieDetails({ selectedId, onCloseMovie }) {
     Director: director,
     Genre: genre,
   } = movie;
-  console.log("testing start");
-  console.log(title, year);
-  console.log("testing finish");
+  function handleAdd() {
+    const newMovie = {
+      imdbId: selectedId,
+      title,
+      year,
+      poster,
+      imdbRating: Number(imdbRating),
+      runtime: Number(runtime.split(" ").at(0)),
+      userRating,
+      // release,
+      // actors,
+      // director,
+      // genre
+    };
+    onAddWatched(newMovie);
+    onCloseMovie();
+  }
   useEffect(
     function () {
       async function getMovieDetails() {
@@ -294,7 +312,22 @@ function MovieDetails({ selectedId, onCloseMovie }) {
           </header>
           <section>
             <div className="rating">
-              <StarRating maxRating={10} size={24} />
+              {!isWatched ? (
+                <>
+                  <StarRating
+                    maxRating={10}
+                    size={24}
+                    onSetRating={setuserRating}
+                  />
+                  {userRating > 0 && (
+                    <button className="btn-add" onClick={handleAdd}>
+                      + Add to list{" "}
+                    </button>
+                  )}
+                </>
+              ) : (
+                <p>You rated with Movie</p>
+              )}
             </div>
             <p>
               <em>{plot}</em>
@@ -316,13 +349,17 @@ export default function App() {
   const [error, setError] = useState("");
   const [selectedId, setSelectedId] = useState(null);
   const KEY = "414128c4";
-  const tempQuery = "batman";
+  // const tempQuery = "batman";
   function handleSelectedMovie(id) {
     setSelectedId((selectedId) => (selectedId === id ? null : id));
   }
 
   function onCloseMovie() {
     return setSelectedId(null);
+  }
+
+  function handleAddWatched(movie) {
+    setWatched((watched) => [...watched, movie]);
   }
   useEffect(() => {
     async function fetchMovies() {
@@ -383,6 +420,8 @@ export default function App() {
               <MovieDetails
                 selectedId={selectedId}
                 onCloseMovie={onCloseMovie}
+                onAddWatched={handleAddWatched}
+                watched={watched}
               />
             ) : (
               <>
