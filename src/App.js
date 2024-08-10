@@ -285,6 +285,7 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
     onAddWatched(newMovie);
     onCloseMovie();
   }
+
   useEffect(
     function () {
       async function getMovieDetails() {
@@ -299,6 +300,20 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
       getMovieDetails();
     },
     [selectedId]
+  );
+
+  // useEffect(() => (document.title = `Movies ${title}`), [title]);
+  useEffect(
+    function () {
+      if (!title) {
+        return;
+      }
+      document.title = `Movies ${title}`;
+      return function () {
+        document.title = "usepopcorn";
+      };
+    },
+    [title]
   );
   return (
     <div className="details">
@@ -376,17 +391,35 @@ export default function App() {
   function handleAddWatched(movie) {
     setWatched((watched) => [...watched, movie]);
   }
+  function handleCloseMovie() {
+    setSelectedId(null);
+  }
 
   function handleDeleteWatched(id) {
     setWatched((watched) => watched.filter((movie) => movie.imdbID !== id));
   }
+  useEffect(function () {
+    function callback(e) {
+      if (e.code === "Escape") {
+        // handleCloseMovie();
+        onCloseMovie();
+      }
+    }
+    document.addEventListener("keydown", callback);
+    return function () {
+      document.removeEventListener("keydown", callback);
+    };
+  }, []);
+
   useEffect(() => {
+    const controller = new AbortController();
     async function fetchMovies() {
       try {
         setIsLoading(true);
         setError("");
         const res = await fetch(
-          `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`
+          `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`,
+          { signal: controller.signal }
         );
         if (!res.ok) {
           throw new Error("Something Went Wrong");
@@ -396,11 +429,14 @@ export default function App() {
           throw new Error("No results found");
         }
         setMovies(data.Search);
+        setError("");
         console.log(data.Search);
         setIsLoading(false);
       } catch (error) {
         console.error(error.message);
-        setError(error.message);
+        if (error.name !== "AbortError") {
+          setError(error.message);
+        }
       } finally {
         setIsLoading(false);
       }
@@ -410,7 +446,11 @@ export default function App() {
       setError("");
       return;
     }
+    handleCloseMovie();
     fetchMovies();
+    return function () {
+      controller.abort();
+    };
   }, [query]);
 
   return (
