@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 import StarRating from "./Components/StartRating";
 const KEY = "414128c4";
@@ -73,23 +73,6 @@ function Logo() {
   );
 }
 function SearchBar({ query, setQuery }) {
-  const inputEl = useRef(null);
-  useEffect(
-    function () {
-      function callback(e) {
-        if (document.activeElement === inputEl.current) return;
-        if (e.code === "Enter") {
-          inputEl.current.focus();
-          setQuery("");
-        }
-        document.addEventListener("keydown", callback);
-        return () => {
-          document.removeEventListener("keydown", callback);
-        };
-      }
-    },
-    [setQuery]
-  );
   return (
     <>
       <input
@@ -388,13 +371,10 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
   );
 }
 export default function App() {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState("inception");
 
   const [movies, setMovies] = useState([]);
-  const [watched, setWatched] = useState(function () {
-    const setValue = localStorage.getItem("watched");
-    return JSON.parse(setValue);
-  });
+  const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [selectedId, setSelectedId] = useState(null);
@@ -410,7 +390,6 @@ export default function App() {
 
   function handleAddWatched(movie) {
     setWatched((watched) => [...watched, movie]);
-    // localStorage.setItem("watched", JSON.stringify([...watched, movie]));
   }
   function handleCloseMovie() {
     setSelectedId(null);
@@ -432,15 +411,6 @@ export default function App() {
     };
   }, []);
 
-  // useEffect(
-  //   function () {
-  //     localStorage.setItem("watched", JSON.stringify([...watched, movie]));
-  //   },
-  //   [watched]
-  // );
-  useEffect(() => {
-    localStorage.setItem("watched", JSON.stringify(watched));
-  }, [watched]);
   useEffect(() => {
     const controller = new AbortController();
     async function fetchMovies() {
