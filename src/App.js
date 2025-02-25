@@ -53,8 +53,7 @@ const tempWatchedData = [
 const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
 
-function Navbar({ children }) {
-  const [movies, setMovies] = useState([]);
+function Navbar({ children, movies }) {
   return (
     <nav className="nav-bar">
       <Logo />
@@ -106,9 +105,12 @@ function SearchBar({ query, setQuery }) {
   );
 }
 function NumsResult({ movies }) {
+  // If movies is undefined or null, show 0 results
+  const numResults = movies?.length || 0;
+
   return (
     <p className="num-results">
-      Found <strong>{movies.length}</strong> results
+      Found <strong>{numResults}</strong> results
     </p>
   );
 }
@@ -181,9 +183,24 @@ function WatchedBox() {
 }
   */
 function Watchsummary({ watched }) {
+  if (!watched || watched.length === 0) {
+    return (
+      <div className="summary">
+        <h2>Movies you watched</h2>
+        <div>
+          <p>
+            <span>#️⃣</span>
+            <span>0 movies</span>
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   const avgImdbRating = average(watched.map((movie) => movie.imdbRating));
   const avgUserRating = average(watched.map((movie) => movie.userRating));
   const avgRuntime = average(watched.map((movie) => movie.runtime));
+
   return (
     <div className="summary">
       <h2>Movies you watched</h2>
@@ -194,15 +211,15 @@ function Watchsummary({ watched }) {
         </p>
         <p>
           <span>⭐️</span>
-          <span>{avgImdbRating}</span>
+          <span>{avgImdbRating.toFixed(1)}</span>
         </p>
         <p>
           <span>🌟</span>
-          <span>{avgUserRating}</span>
+          <span>{avgUserRating.toFixed(1)}</span>
         </p>
         <p>
           <span>⏳</span>
-          <span>{avgRuntime} min</span>
+          <span>{avgRuntime.toFixed(0)} min</span>
         </p>
       </div>
     </div>
@@ -226,8 +243,11 @@ function WatchedMovieList({ watched, onDeleteWatched }) {
 function WatchedMovie({ movie, onDeleteWatched }) {
   return (
     <li>
-      <img src={movie.poster} alt={`${movie.title} poster`} />
-      <h3>{movie.title}</h3>
+      <img
+        src={movie.poster || movie.Poster}
+        alt={`${movie.title || movie.Title} poster`}
+      />
+      <h3>{movie.title || movie.Title}</h3>
       <div>
         <p>
           <span>⭐️</span>
@@ -268,9 +288,9 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [userRating, setuserRating] = useState("");
-  const isWatched = watched.map((movie) => movie.imdbId).includes(selectedId);
+  const isWatched = watched.map((movie) => movie.imdbID).includes(selectedId);
   const watchedUserRating = watched.find(
-    (movie) => movie.imdbId === selectedId
+    (movie) => movie.imdbID === selectedId
   )?.userRating;
 
   const {
@@ -392,8 +412,8 @@ export default function App() {
 
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState(function () {
-    const setValue = localStorage.getItem("watched");
-    return JSON.parse(setValue);
+    const storedValue = localStorage.getItem("watched");
+    return JSON.parse(storedValue) || [];
   });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -460,7 +480,8 @@ export default function App() {
         }
         setMovies(data.Search);
         setError("");
-        console.log(data.Search);
+        // Log the total results to check
+        console.log("Total results:", data.totalResults);
         setIsLoading(false);
       } catch (error) {
         console.error(error.message);
@@ -485,7 +506,7 @@ export default function App() {
 
   return (
     <>
-      <Navbar>
+      <Navbar movies={movies}>
         <SearchBar query={query} setQuery={setQuery} />
       </Navbar>
       <Main>
