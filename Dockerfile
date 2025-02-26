@@ -1,58 +1,43 @@
-# # Build stage
-# FROM node:lts-alpine as build
+# FROM node
+
+# # Set the working directory
 # WORKDIR /app
-# COPY package*.json ./
+
+# # Copy package files and install dependencies
+# COPY package.json package-lock.json ./
 # RUN npm install
+
+# # Copy the rest of the application code
 # COPY . .
+
+# # Build the React app for production
 # RUN npm run build
+# EXPOSE 3000
 
-# # Production stage
-# FROM nginx:stable-alpine
-# COPY --from=build /app/build /usr/share/nginx/html
-# EXPOSE 80
-# CMD ["nginx", "-g", "daemon off;"]
+# # Start Nginx in the foreground
+# CMD [ "npm", "start" ] 
 
-
-# FROM ubuntu
-
-# RUN apt-get update
-# RUN apt-get install -y curl
-# RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -
-# RUN apt-get upgrade -y
-# RUN apt-get install -y nodejs
-
-# COPY package.json package.json
-# COPY package-lock.json package-lock.json
-# COPY main.js main.js
-
-# RUN npm install
-
-# ENTRYPOINT [ "npm", "main.js" ]
-
-# Use an official Node.js image as the base image
-FROM node:18-alpine AS build
+FROM node:22.12.0-alpine AS builder
 
 # Set the working directory
-WORKDIR /app
+WORKDIR /build  
 
-# Copy package files and install dependencies
+# Copy package files and install depend encies    
 COPY package.json package-lock.json ./
 RUN npm install
 
-# Copy the rest of the application code
+# Copy the rest of the application code 
 COPY . .
 
-# Build the React app for production
+# Build the React app for production    
 RUN npm run build
 
-# Use Nginx to serve the static files
-FROM nginx:stable-alpine
-
-# Copy the built files from the previous stage to Nginx's default directory
-COPY --from=build /app/build /usr/share/nginx/html
-
-# Expose port 80 for serving the application
-EXPOSE 80
-
-# Start Nginx in the foreground
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+FROM node:22.12.0-alpine AS runner
+WORKDIR /build  
+COPY --from=builder /build/node_modules ./node_modules
+COPY --from=builder /build/package.json ./package.json
+COPY --from=builder /build/package-lock.json ./package-lock.json 
+COPY --from=builder /build/build ./build
+# Expose the port the app runs on
+EXPOSE 3000 
+CMD [ "npm" ,"start" ]
