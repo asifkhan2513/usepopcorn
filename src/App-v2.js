@@ -68,7 +68,8 @@ function Logo() {
   return (
     <div className="logo">
       <span role="img">🍿</span>
-      <h1>usePopcorn</h1>
+      <h1>usePopcorn by asif </h1>
+      <p>Created by asif khan </p>
     </div>
   );
 }
