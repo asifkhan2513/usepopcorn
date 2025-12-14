@@ -5,7 +5,7 @@ services:
       context: . # Current directory (where Dockerfile is located)
       dockerfile: Dockerfile # Specify the Dockerfile
     ports:
-      - "3000:80"
+      - "8002:8002"
     volumes:
       - usepop-data:/usr/share/nginx/html/data # Mount the volume
 volumes:
