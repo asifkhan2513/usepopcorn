@@ -1,12 +1,7 @@
-version: "3.8"
+version: '3.9'
+
 services:
   web:
-    build:
-      context: . # Current directory (where Dockerfile is located)
-      dockerfile: Dockerfile # Specify the Dockerfile
+    build: .
     ports:
       - "8002:8002"
-    volumes:
-      - usepop-data:/usr/share/nginx/html/data # Mount the volume
-volumes:
-  usepop-data: # Define the volume
