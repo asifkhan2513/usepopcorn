@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 
 import StarRating from "./Components/StartRating";
 const KEY = "414128c4";
@@ -68,8 +69,7 @@ function Logo() {
   return (
     <div className="logo">
       <span role="img">🍿</span>
-      <h1>usePopcorn by asif khan </h1>
-      <p>Created by asif khan </p>
+      <h1>usePopcorn</h1>
     </div>
   );
 }
@@ -456,6 +456,17 @@ export default function App() {
 
   return (
     <>
+      <Helmet>
+        <title>UsePopcorn – Movies, Ratings & More</title>
+        <meta
+          name="description"
+          content="Find any movie, read ratings, and track what you've watched with UsePopcorn - the ultimate movie companion."
+        />
+        <meta
+          name="keywords"
+          content="usepopcorn app, film search, best movie ratings, cinema reviews, asif khan dev"
+        />
+      </Helmet>
       <Navbar>
         <SearchBar query={query} setQuery={setQuery} />
       </Navbar>
@@ -504,6 +515,39 @@ export default function App() {
         </Box> */}
         {/* <WatchedBox /> */}
       </Main>
+      <Footer />
     </>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="footer-legal">
+      <div className="footer-content">
+        <p> design and developern by asif khan</p>
+        <div className="legal-container">
+          <div className="legal-section">
+            <h3>Privacy Policy</h3>
+            <p>
+              At <strong>UsePopcorn</strong> (https://usepopcorn.store/), we
+              prioritize your privacy. We do **not** collect, store, or share
+              any personal identity data. Your "Watched" list and movie ratings
+              are stored exclusively in your browser's
+              <strong> Local Storage</strong>, ensuring your data never leaves
+              your device.
+            </p>
+          </div>
+          <div className="legal-section">
+            <h3>Terms & Conditions</h3>
+            <p>
+              By using UsePopcorn, you agree to use the platform for personal,
+              non-commercial movie discovery. Data is retrieved via the OMDb
+              API; we do not claim ownership of movie imagery or descriptions.
+              The service is provided "as-is" without warranties of any kind.
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
   );
 }

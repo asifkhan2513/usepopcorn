@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Helmet } from "react-helmet";
 
 import StarRating from "./Components/StartRating";
 const KEY = process.env.REACT_APP_API_KEY || "414128c4";
@@ -469,6 +470,43 @@ export default function App() {
 
   return (
     <>
+      <Helmet>
+        <title>
+          UsePopcorn - Discover, Rate & Track Movies | Ratings, Trailers,
+          Watchlist
+        </title>
+
+        <meta
+          name="description"
+          content="UsePopcorn helps you discover trending movies, watch trailers, compare ratings, and track what you’ve watched. Build your watchlist, rate films, and keep your personal movie diary in one place."
+        />
+
+        <meta
+          name="keywords"
+          content="UsePopcorn, movie discovery, movie ratings, trailers, watchlist, movie tracker, films, cinema database, trending movies, usepopcorn, top rated movies, IMDB ratings, personal movie log, what to watch, movie recommendations, popcorn app"
+        />
+
+        <meta
+          property="og:title"
+          content="UsePopcorn - Discover, Rate & Track Movies"
+        />
+        <meta
+          property="og:description"
+          content="Find movies fast, watch trailers, rate what you watch, and organize your watchlist with UsePopcorn."
+        />
+        <meta property="og:type" content="website" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="UsePopcorn - Discover, Rate & Track Movies"
+        />
+        <meta
+          name="twitter:description"
+          content="Discover trending movies, watch trailers, and track your watched list with your own ratings."
+        />
+      </Helmet>
+
       <Navbar movies={movies}>
         <SearchBar query={query} setQuery={setQuery} />
       </Navbar>
@@ -517,6 +555,39 @@ export default function App() {
         </Box> */}
         {/* <WatchedBox /> */}
       </Main>
+      <Footer />
     </>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="footer-legal">
+      <div className="footer-content">
+        <p> design and developern by asif khan</p>
+        <div className="legal-container">
+          <div className="legal-section">
+            <h3>Privacy Policy</h3>
+            <p>
+              At <strong>UsePopcorn</strong> (https://usepopcorn.store/), we
+              prioritize your privacy. We do **not** collect, store, or share
+              any personal identity data. Your "Watched" list and movie ratings
+              are stored exclusively in your browser's
+              <strong> Local Storage</strong>, ensuring your data never leaves
+              your device.
+            </p>
+          </div>
+          <div className="legal-section">
+            <h3>Terms & Conditions</h3>
+            <p>
+              By using UsePopcorn, you agree to use the platform for personal,
+              non-commercial movie discovery. Data is retrieved via the OMDb
+              API; we do not claim ownership of movie imagery or descriptions.
+              The service is provided "as-is" without warranties of any kind.
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
   );
 }

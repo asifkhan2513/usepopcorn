@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "UsePopcorn",
+  "name": "UsePopcorn – Movies & Ratings",
+  "description": "Discover movies, ratings, and trailers with UsePopcorn - developed by Asif Khan.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +21,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#6741d9",
+  "background_color": "#212529"
 }

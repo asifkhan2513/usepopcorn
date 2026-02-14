@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
 
+# Host
+Host: https://usepopcorn.store/
+
+# Sitemap
 Sitemap: https://usepopcorn.store/sitemap.xml
