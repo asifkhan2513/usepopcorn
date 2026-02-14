@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 
 import StarRating from "./Components/StartRating";
 const KEY = import.meta.env.VITE_APP_API_KEY || "414128c4";
+console.log("Current API Key:", KEY);
 
 // Remove tempMovieData since it's not being used
 // const tempMovieData = [ ... ];

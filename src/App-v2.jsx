@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 
 import StarRating from "./Components/StartRating";
-const KEY = "414128c4";
+const KEY = import.meta.env.VITE_APP_API_KEY || "414128c4";
 
 const tempMovieData = [
   {
