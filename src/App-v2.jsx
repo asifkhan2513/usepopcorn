@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
+import logoVideo from "./logo.mp4";
 
 import StarRating from "./Components/StartRating";
 const KEY = import.meta.env.VITE_APP_API_KEY || "414128c4";
@@ -68,8 +69,17 @@ function Navbar({ children }) {
 function Logo() {
   return (
     <div className="logo">
-      <span role="img">🍿</span>
-      <h1>usePopcorn</h1>
+      <div className="logo-container">
+        <video
+          src={logoVideo}
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="logo-video"
+        ></video>
+        <p className="logo-subtitle">usePopcorn</p>
+      </div>
     </div>
   );
 }
