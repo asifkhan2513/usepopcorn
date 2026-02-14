@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet";
 
 import StarRating from "./Components/StartRating";
-const KEY = process.env.REACT_APP_API_KEY || "414128c4";
+const KEY = import.meta.env.VITE_APP_API_KEY || "414128c4";
 
 // Remove tempMovieData since it's not being used
 // const tempMovieData = [ ... ];
