@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+  <ShortName>UsePopcorn</ShortName>
+  <Description>Search movies on UsePopcorn - Movie Database, Ratings &amp; Trailers</Description>
+  <Tags>movies ratings trailers watchlist IMDB</Tags>
+  <Contact>asifkhan2513@gmail.com</Contact>
+  <Url type="text/html" template="https://www.usepopcorn.store/?q={searchTerms}"/>
+  <Url type="application/x-suggestions+json" template="https://www.usepopcorn.store/suggestions?q={searchTerms}"/>
+  <LongName>UsePopcorn Movie Search - Discover Movies, Ratings &amp; Trailers</LongName>
+  <Image height="64" width="64" type="image/png">https://www.usepopcorn.store/logo192.png</Image>
+  <Image height="16" width="16" type="image/x-icon">https://www.usepopcorn.store/favicon.ico</Image>
+  <Query role="example" searchTerms="batman" />
+  <Developer>Asif Khan</Developer>
+  <Attribution>UsePopcorn Movie Database © 2024 Asif Khan</Attribution>
+  <SyndicationRight>open</SyndicationRight>
+  <AdultContent>false</AdultContent>
+  <Language>en-us</Language>
+  <OutputEncoding>UTF-8</OutputEncoding>
+  <InputEncoding>UTF-8</InputEncoding>
+</OpenSearchDescription>

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet";
 import logoVideo from "./logo.mp4";
+import KnowledgePanel from "./Components/KnowledgePanel";
 
 import StarRating from "./Components/StartRating";
 const KEY = import.meta.env.VITE_APP_API_KEY || "414128c4";
@@ -61,7 +62,7 @@ function SearchBar({ query, setQuery }) {
       // Cleanup function
       return () => document.removeEventListener("keydown", callback);
     },
-    [setQuery]
+    [setQuery],
   );
 
   return (
@@ -266,7 +267,7 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
   const [userRating, setuserRating] = useState("");
   const isWatched = watched.map((movie) => movie.imdbID).includes(selectedId);
   const watchedUserRating = watched.find(
-    (movie) => movie.imdbID === selectedId
+    (movie) => movie.imdbID === selectedId,
   )?.userRating;
 
   const {
@@ -304,7 +305,7 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
       async function getMovieDetails() {
         setIsLoading(true);
         const res = await fetch(
-          `https://www.omdbapi.com/?apikey=${KEY}&i=${selectedId}`
+          `https://www.omdbapi.com/?apikey=${KEY}&i=${selectedId}`,
         );
         const data = await res.json();
         setMovie(data);
@@ -312,7 +313,7 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
       }
       getMovieDetails();
     },
-    [selectedId]
+    [selectedId],
   );
 
   // useEffect(() => (document.title = `Movies ${title}`), [title]);
@@ -326,7 +327,7 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
         document.title = "usepopcorn";
       };
     },
-    [title]
+    [title],
   );
   return (
     <div className="details">
@@ -444,7 +445,7 @@ export default function App() {
         setError("");
         const res = await fetch(
           `https://www.omdbapi.com/?apikey=${KEY}&s=${query}`,
-          { signal: controller.signal }
+          { signal: controller.signal },
         );
         if (!res.ok) {
           throw new Error("Something Went Wrong");
@@ -521,6 +522,9 @@ export default function App() {
       <Navbar movies={movies}>
         <SearchBar query={query} setQuery={setQuery} />
       </Navbar>
+
+      <KnowledgePanel />
+
       <Main>
         <Box
           element={
@@ -575,12 +579,35 @@ function Footer() {
   return (
     <footer className="footer-legal">
       <div className="footer-content">
-        <p> design and developern by asif khan</p>
+        <div className="footer-header">
+          <p>
+            Design and developed by <strong>Asif Khan</strong>
+          </p>
+          <div className="footer-links">
+            <a
+              href="https://www.usepopcorn.store/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="site-link"
+            >
+              🍿 www.usepopcorn.store
+            </a>
+            <a
+              href="https://github.com/asifkhan2513"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="github-link"
+            >
+              GitHub Profile
+            </a>
+          </div>
+        </div>
+
         <div className="legal-container">
           <div className="legal-section">
             <h3>Privacy Policy</h3>
             <p>
-              At <strong>UsePopcorn</strong> (https://usepopcorn.store/), we
+              At <strong>UsePopcorn</strong> (https://www.usepopcorn.store/), we
               prioritize your privacy. We do **not** collect, store, or share
               any personal identity data. Your "Watched" list and movie ratings
               are stored exclusively in your browser's
@@ -596,6 +623,17 @@ function Footer() {
               API; we do not claim ownership of movie imagery or descriptions.
               The service is provided "as-is" without warranties of any kind.
             </p>
+          </div>
+        </div>
+
+        <div className="footer-bottom">
+          <p className="copyright">© 2024 UsePopcorn. All rights reserved.</p>
+          <div className="footer-meta">
+            <span>Movie Database</span>
+            <span>•</span>
+            <span>Ratings & Reviews</span>
+            <span>•</span>
+            <span>Watchlist Tracker</span>
           </div>
         </div>
       </div>

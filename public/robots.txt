@@ -1,8 +1,70 @@
 User-agent: *
 Allow: /
+Allow: /static/
+Allow: /assets/
+Allow: /*.css
+Allow: /*.js
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.gif
+Allow: /*.svg
+Allow: /*.ico
+Allow: /*.mp4
+Allow: /*.webp
+
+# Disallow unnecessary files
+Disallow: /node_modules/
+Disallow: /build/
+Disallow: /.git/
+Disallow: /.env
+Disallow: /package.json
+Disallow: /package-lock.json
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
 
 # Host
-Host: https://usepopcorn.store/
+Host: https://www.usepopcorn.store/
 
 # Sitemap
-Sitemap: https://usepopcorn.store/sitemap.xml
+Sitemap: https://www.usepopcorn.store/sitemap.xml
+
+# Additional sitemaps for different content types
+Sitemap: https://www.usepopcorn.store/sitemap-movies.xml
+Sitemap: https://www.usepopcorn.store/sitemap-genres.xml
+
+# Allow specific search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 1
+
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 2
+
+User-agent: YandexBot
+Allow: /
+Crawl-delay: 2
+
+# Block bad bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
