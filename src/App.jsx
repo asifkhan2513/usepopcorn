@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet";
 import logoVideo from "./logo.mp4";
-import KnowledgePanel from "./Components/KnowledgePanel";
 
 import StarRating from "./Components/StartRating";
 const KEY = import.meta.env.VITE_APP_API_KEY || "414128c4";
@@ -522,8 +521,6 @@ export default function App() {
       <Navbar movies={movies}>
         <SearchBar query={query} setQuery={setQuery} />
       </Navbar>
-
-      <KnowledgePanel />
 
       <Main>
         <Box

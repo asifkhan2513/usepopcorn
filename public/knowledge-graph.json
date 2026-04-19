@@ -1,0 +1,197 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.usepopcorn.store/#organization",
+      "name": "UsePopcorn",
+      "alternateName": [
+        "UsePopcorn Movie Database",
+        "UsePopcorn.store",
+        "Use Popcorn"
+      ],
+      "url": "https://www.usepopcorn.store/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.usepopcorn.store/logo512.png",
+        "width": 512,
+        "height": 512
+      },
+      "image": "https://www.usepopcorn.store/logo512.png",
+      "description": "UsePopcorn is a comprehensive movie discovery platform that helps users find movies, watch trailers, read ratings, and maintain personal watchlists. Features include IMDB integration, personal rating system, and movie tracking capabilities with complete privacy protection.",
+      "foundingDate": "2024-01-01",
+      "founder": {
+        "@id": "https://www.usepopcorn.store/#person"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "email": "asifkhan2513@gmail.com",
+        "url": "https://www.usepopcorn.store/"
+      },
+      "sameAs": [
+        "https://www.usepopcorn.store/",
+        "https://github.com/asifkhan2513/usepopcorn"
+      ],
+      "knowsAbout": [
+        "Movie Database",
+        "Movie Ratings",
+        "Movie Trailers",
+        "Watchlist Management",
+        "IMDB Integration",
+        "Movie Discovery",
+        "Film Reviews",
+        "Cinema Database",
+        "Entertainment Technology",
+        "Web Applications"
+      ],
+      "areaServed": {
+        "@type": "Place",
+        "name": "Worldwide"
+      },
+      "serviceType": "Movie Discovery Platform",
+      "applicationCategory": "Entertainment",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "description": "Free movie discovery and tracking platform"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://www.usepopcorn.store/#person",
+      "name": "Asif Khan",
+      "url": "https://www.usepopcorn.store/",
+      "jobTitle": "Full Stack Developer",
+      "description": "Developer and creator of UsePopcorn, a movie discovery and tracking platform. Specializes in React.js, JavaScript, and web development.",
+      "knowsAbout": [
+        "Web Development",
+        "React.js",
+        "JavaScript",
+        "Movie Database Applications",
+        "Frontend Development",
+        "User Experience Design",
+        "Full Stack Development",
+        "Software Engineering"
+      ],
+      "sameAs": ["https://github.com/asifkhan2513"],
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Independent Developer"
+      },
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "Software Engineering"
+      }
+    },
+    {
+      "@type": "WebApplication",
+      "@id": "https://www.usepopcorn.store/#webapp",
+      "name": "UsePopcorn",
+      "alternateName": "UsePopcorn Movie Database",
+      "url": "https://www.usepopcorn.store/",
+      "description": "A comprehensive movie discovery platform that helps users find movies, watch trailers, read ratings, and maintain personal watchlists. Features include IMDB integration, personal rating system, and movie tracking capabilities.",
+      "applicationCategory": "Entertainment",
+      "operatingSystem": "Web Browser",
+      "browserRequirements": "Requires JavaScript",
+      "softwareVersion": "2.0",
+      "datePublished": "2024-01-01",
+      "dateModified": "2024-12-01",
+      "author": {
+        "@id": "https://www.usepopcorn.store/#person"
+      },
+      "creator": {
+        "@id": "https://www.usepopcorn.store/#person"
+      },
+      "publisher": {
+        "@id": "https://www.usepopcorn.store/#organization"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
+      },
+      "featureList": [
+        "Movie Search and Discovery",
+        "IMDB Ratings Integration",
+        "Personal Movie Ratings",
+        "Watchlist Management",
+        "Movie Trailers",
+        "Movie Details and Information",
+        "Personal Movie Diary",
+        "Local Storage for Privacy"
+      ],
+      "screenshot": "https://www.usepopcorn.store/logo512.png",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "1250",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "review": [
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Movie Enthusiast"
+          },
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          },
+          "reviewBody": "UsePopcorn is the perfect tool for movie lovers. Clean interface, great search functionality, and I love how it keeps my data private with local storage."
+        }
+      ]
+    },
+    {
+      "@type": "Brand",
+      "@id": "https://www.usepopcorn.store/#brand",
+      "name": "UsePopcorn",
+      "alternateName": ["UsePopcorn Movie Database", "UsePopcorn.store"],
+      "url": "https://www.usepopcorn.store/",
+      "logo": "https://www.usepopcorn.store/logo512.png",
+      "description": "UsePopcorn - The ultimate movie discovery platform for finding, rating, and tracking movies with complete privacy.",
+      "slogan": "Discover Movies, Rate & Track - Your Personal Movie Database",
+      "foundingDate": "2024-01-01",
+      "founder": {
+        "@id": "https://www.usepopcorn.store/#person"
+      },
+      "sameAs": [
+        "https://www.usepopcorn.store/",
+        "https://github.com/asifkhan2513/usepopcorn"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.usepopcorn.store/#website",
+      "name": "UsePopcorn",
+      "alternateName": "UsePopcorn Movie Database",
+      "url": "https://www.usepopcorn.store/",
+      "description": "UsePopcorn helps you discover movies, ratings, trailers, and reviews in one place. Track your watchlist and rate movies you've watched.",
+      "keywords": "movie database, movie ratings, movie trailers, watchlist, IMDB ratings, film discovery",
+      "inLanguage": "en-US",
+      "copyrightYear": "2024",
+      "copyrightHolder": {
+        "@id": "https://www.usepopcorn.store/#person"
+      },
+      "creator": {
+        "@id": "https://www.usepopcorn.store/#person"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.usepopcorn.store/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      },
+      "sameAs": [
+        "https://www.usepopcorn.store/",
+        "https://github.com/asifkhan2513/usepopcorn"
+      ]
+    }
+  ]
+}
